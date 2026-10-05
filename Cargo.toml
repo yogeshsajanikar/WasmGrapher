@@ -46,6 +46,9 @@
         "std",
         "parking_lot",
     ]}
+    # pollster is used in cfg(not(wasm)) blocks — required on all native arches.
+    # The upstream Cargo.toml only declared it for x86_64, which breaks aarch64.
+    pollster="0.4.0"
     winit="0.30.0"
 
     [dependencies.specs]
@@ -59,11 +62,6 @@
 
 [target.'cfg(target_arch = "aarch64")'.dependencies]
     getrandom={version="0.3"}
-
-# pollster is used in cfg(not(wasm)) blocks — needed on all native architectures
-[dependencies]
-    pollster="0.4.0"
-
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
     console_error_panic_hook="0.1.6"
